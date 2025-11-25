@@ -1,0 +1,7 @@
+Django==5.2.4
+mysqlclient>=2.1
+pillow>=9.0
+django-debug-toolbar>=4.0
+# Optional: if you can't build mysqlclient on Windows, install PyMySQL and add
+# `import pymysql; pymysql.install_as_MySQLdb()` in MJT/__init__.py
+pymysql>=1.0
