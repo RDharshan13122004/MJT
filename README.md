@@ -1,6 +1,6 @@
-# MJT — Internal Tracking Dashboard
+# MJT (Manufacturing Job Tracking) — Internal Tracking Dashboard
 
-This project (MJT) is a Django-based internal tracking and dashboard application. It contains two main Django apps:
+This project (MJT - Manufacturing Job Tracking ) is a Django-based internal tracking and dashboard application. It contains two main Django apps:
 - `tracking`: Business functionality (invoices, inward entries, program details, dashboards)
 - `users`: User sign-up/login and session handling
 
