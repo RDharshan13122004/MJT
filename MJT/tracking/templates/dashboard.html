@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+  <div class="card">
+    <h2>Inward Entries</h2>
+    <p>Manage incoming materials or job entries.</p>
+    <a href="{% url "tracking:inward" %}"><button class="view-btn">View</button></a>
+  
+  </div>
+
+  <div class="card">
+    <h2>Program Details</h2>
+    <p>Manage programming and planning details of jobs.</p>
+    <a href="{% url "tracking:program" %}"><button class="view-btn">View</button></a>
+
+  </div>
+
+  <div class="card">
+    <h2>Processing Logs</h2>
+    <p>Capture actual processing data and machine logs.</p>
+    <a href="{% url "tracking:processing" %}"><button class="view-btn">View</button></a>
+  </div>
+
+  <div class="card">
+    <h2>Invoices</h2>
+    <p>View and update invoices and dispatch details.</p>
+    <a href="{% url "tracking:invoices" %}"><button class="view-btn">View</button></a>
+  </div>
+
+{% endblock %}

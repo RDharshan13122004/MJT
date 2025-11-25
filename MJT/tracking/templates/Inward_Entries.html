@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Inward Entries{% endblock %}
+
+{% block content %}
+<div style="grid-column: 1 / -1;">
+  <h2 style="color:#333;">📦 Inward Entries</h2>
+  <p>List of all incoming materials or job entries.</p>
+
+  {% if user.role in 'Admin Storekeeper' %}
+    <a href="{% url "tracking:inwardentry" %}"><button class="add-btn">+ Add Entry</button></a>
+  {% endif %}
+
+  <table style="width:100%; border-collapse:collapse; margin-top:15px;">
+    <thead>
+      <tr style="background:#007bff; color:white;">
+        <th>ID</th>
+        <th>SL. No</th>
+        <th>Date</th>
+        <th>Slip No</th>
+        <th>Yellow / White</th>
+        <th>Customer DC No</th>
+        <th>WO No</th>
+        <th>Customer</th>
+        <th>Material</th>
+        <th>Thickness (mm)</th>
+        <th>Width (mm)</th>
+        <th>Length (mm)</th>
+        <th>Qty</th>
+        <th>Density</th>
+        {% if user.role in 'Admin Storekeeper' %}
+          <th>Actions</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in inward_entries %}
+      <tr style="background:#fff; border-bottom:1px solid #005398ff;">
+        <td style="text-align:center; border:1px solid #005398ff; ">{{ entry.id }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.sl_no }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.date }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.inward_slip_no }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.yellow_white }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.customer_dc_no }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.wo_no }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.customer_name }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.material_type }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.thickness_mm }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.width_mm }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.length_mm }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.quantity }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ entry.density }}</td>
+        {% if user.role in 'Admin Storekeeper' %}
+        <td style="text-align:center; border:1px solid #005398ff;">
+          <a href="{% url 'tracking:Update_inwardentry' entry.id %}"><button class="edit-btn">Edit</button></a>
+        </td>
+        {% endif %}
+      </tr>
+      {% empty %}
+        <tr><td colspan="10">No records found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

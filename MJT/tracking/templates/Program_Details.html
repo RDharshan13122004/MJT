@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Program Details{% endblock %}
+
+{% block content %}
+<div style="grid-column: 1 / -1;">
+  <h2>🧩 Program Details</h2>
+  <p>Planning and programming details associated with jobs.</p>
+
+  {% if user.role in 'Admin ProductionPlanner' %}
+    <a href="{% url "tracking:programdetailentry" %}"><button class="add-btn">+ Add Program</button></a>
+  {% endif %}
+
+  <table style="width:100%; border-collapse:collapse; margin-top:15px;">
+    <thead>
+      <tr style="background:#007bff; color:white;">
+        <th>ID</th>
+        <th>Program No</th>
+        <th>Inward Entry ID</th>
+        <th>Date</th>
+        <th>Planned Qty</th>
+        <th>Balance Qty</th>
+        <th>Used Weight (kg)</th>
+        <th>No. of Components / Sheet</th>
+        <th>Cut Length / Sheet</th>
+        <th>Pierce / Sheet</th>
+        <th>Planned in Mins / Sheet</th>
+        {% if user.role in 'Admin ProductionPlanner' %}
+        <th>Actions</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for program in program_details %}
+      <tr style="background:#fff; border:1px solid #005398ff;">
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ program.id }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ program.prg_no }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ program.inward_entry.id }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ program.prg_date }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ program.planned_qty }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ program.balance_qty }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ program.used_weight_kg }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ program.components_per_sheet }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ program.cut_length_per_sheet }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ program.pierce_per_sheet }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ program.planned_mins_per_sheet }}</td>
+        {% if user.role in 'Admin ProductionPlanner' %}
+        <td style="text-align:center;">
+          <a href="{% url 'tracking:Update_programdetailentry' program.id %}"><button class="edit-btn">Edit</button></a>
+        </td>
+        {% endif %}
+      </tr>
+      {% empty %}
+      <tr><td colspan="7">No program details found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
+

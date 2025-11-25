@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Processing Logs{% endblock %}
+
+{% block content %}
+<div style="grid-column: 1 / -1;">
+  <h2>⚙️ Processing Logs</h2>
+  <p>Capture actual processing data and machine details.</p>
+
+  {% if user.role in 'Admin Supervisor MachineOperator' %}
+    <a href="{% url "tracking:processinglogentry" %}"><button class="add-btn">+ Add Log</button></a>
+  {% endif %}
+
+  <table style="width:100%; border-collapse:collapse; margin-top:15px;">
+    <thead>
+      <tr style="background:#007bff; color:white;">
+        <th>ID</th>
+        <th>Program Detail</th>
+        <th>Processed Date</th>
+        <th>Shift</th>
+        <th>No. of Sheets Processed</th>
+        <th>Cycle Time (mins)</th>
+        <th>Total Cycle Time (mins)</th>
+        <th>Machine</th>
+        <th>Operator</th>
+        {% if user.role in 'Admin Supervisor MachineOperator' %}
+        <th>Actions</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in processing_logs %}
+      <tr style="background:#fff; border:1px solid #005398ff;">
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ log.id }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ log.program_detail }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ log.processed_date }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ log.shift }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ log.sheets_processed }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ log.cycle_time_per_sheet }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ log.total_cycle_time }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ log.machine }}</td>
+        <td style="text-align:center; border: 1px solid #005398ff;">{{ log.operator }}</td>
+        {% if user.role in 'Admin Supervisor MachineOperator' %}
+        <td style="text-align:center;">
+          <a href="{% url 'tracking:Update_processinglogentry' log.id %}"><button class="edit-btn">Edit</button></a>
+        </td>
+        {% endif %}
+      </tr>
+      {% empty %}
+      <tr><td colspan="8">No logs found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

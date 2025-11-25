@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Invoices{% endblock %}
+
+{% block content %}
+<div style="grid-column: 1 / -1;">
+  <h2>💰 Invoices</h2>
+  <p>Invoice and remarks information.</p>
+
+  {% if user.role in 'Admin DispatchClerk AccountsClerk' %}
+  <a href="{% url "tracking:invoiceentry" %}"><button class="add-btn">+ Add Invoice</button></a>
+  {% endif %}
+
+  <table style="width:100%; border-collapse:collapse; margin-top:15px;">
+    <thead>
+      <tr style="background:#007bff; color:white;">
+        <th>ID</th>
+        <th>Program Detail</th>
+        <th>Invoice No</th>
+        <th>Status</th>
+        <th>Remarks</th>
+        {% if user.role in 'Admin DispatchClerk AccountsClerk' %}
+        <th>Actions</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for invoice in invoices %}
+      <tr style="background:#fff; border:1px solid #005398ff;">
+        <td style="text-align:center; border:1px solid #005398ff;">{{ invoice.id }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ invoice.program_detail }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ invoice.invoice_no }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ invoice.status }}</td>
+        <td style="text-align:center; border:1px solid #005398ff;">{{ invoice.remarks }}</td>
+        {% if user.role in 'Admin DispatchClerk AccountsClerk' %}
+        <td style="text-align:center;">
+          <a href="{% url 'tracking:Update_invoiceentry' invoice.id %}"><button class="edit-btn">Edit</button></a>
+        </td>
+        {% endif %}
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">No invoices found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

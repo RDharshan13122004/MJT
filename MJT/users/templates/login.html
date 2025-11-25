@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login | Manufacturing Job Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand:#00416A;
+      --accent:#035a9d;
+      --muted:#777;
+      --danger:#d9534f;
+      --radius:12px;
+    }
+    *{box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+    body{
+      margin:0;height:100vh;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,#003a5a 0%, #e9eef2 100%);
+      padding:24px;
+    }
+
+    .card{
+      width:100%;max-width:420px;background:#fff;border-radius:var(--radius);
+      box-shadow:0 10px 30px rgba(2,20,40,0.18);padding:36px;
+    }
+
+    h1{color:var(--brand);font-size:20px;margin:0 0 6px;font-weight:600}
+    p.lead{margin:0 0 18px;color:var(--muted);font-size:13px}
+
+    .form-row{margin-bottom:18px;position:relative}
+    label{font-size:13px;margin-bottom:6px;display:block;color:#233;font-weight:500}
+
+    input{
+      width:100%;padding:12px 44px 12px 12px;border:1px solid #d6dbe0;
+      border-radius:10px;font-size:14px;
+    }
+
+    .pw-toggle{
+      position:absolute;right:8px;top:36px;background:transparent;
+      border:none;cursor:pointer;
+    }
+
+    .btn{
+      width:100%;padding:12px;border-radius:10px;border:none;
+      background:var(--brand);color:#fff;font-size:15px;font-weight:600;
+      cursor:pointer;
+    }
+
+    .error{
+      margin-bottom:10px;color:var(--danger);font-size:13px;
+      background:rgba(217,83,79,0.06);padding:8px;border-radius:8px;
+      border:1px solid rgba(217,83,79,0.08)
+    }
+
+  </style>
+</head>
+<body>
+
+  <main class="card">
+    <h1>Manufacturing Job Tracker</h1>
+    <p class="lead">Sign in to your account</p>
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="form-row">
+        <label>User ID</label>
+        <input type="text" name="user_id" required>
+      </div>
+
+      <div class="form-row">
+        <label>Password</label>
+        <input id="password" type="password" name="password" required>
+
+        <button type="button" class="pw-toggle" onclick="togglePw()">
+          👁
+        </button>
+      </div>
+
+      <button class="btn" type="submit">Login</button>
+    </form>
+
+  </main>
+
+  <script>
+    function togglePw(){
+      let p = document.getElementById("password");
+      p.type = (p.type === "password") ? "text" : "password";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h3>Add Program Details</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            {% for field in form %}
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <small style="color:red">{{ field.errors }}</small>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <button class="submit-btn">Save</button>
+    </form>
+</div>
+{% endblock %}

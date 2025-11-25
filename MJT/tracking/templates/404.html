@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Lost in Space</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #0a0f2c, #000000 70%);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            color: white;
+        }
+
+        /* Background Stars */
+        .stars {
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/9UM6ZCs.png') repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: moveStars 60s linear infinite;
+        }
+        @keyframes moveStars {
+            from { background-position: 0 0; }
+            to { background-position: -10000px 5000px; }
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .astronaut {
+            width: 180px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        h1 {
+            font-size: 8rem;
+            font-weight: 700;
+            margin-top: 20px;
+            letter-spacing: 5px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        p {
+            font-size: 1.4rem;
+            margin: 20px 0;
+            opacity: 0.85;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(45deg, #6a5acd, #836fff);
+            color: white;
+            transition: 0.3s ease;
+            box-shadow: 0px 0px 12px #6a5acd;
+        }
+
+        .btn:hover {
+            background: linear-gradient(45deg, #483d8b, #6a5acd);
+            transform: scale(1.06);
+            box-shadow: 0px 0px 18px #836fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+
+    <div class="container">
+        <img src="https://i.imgur.com/8Q59Vme.png" class="astronaut" alt="Astronaut Floating">
+
+        <h1>404</h1>
+
+        <p>Oops! Looks like you drifted into space. 🚀<br>
+        The page you're looking for is... *lost in the galaxy*.</p>
+
+        <button class="btn" onclick="goHome()">Go Back Home</button>
+    </div>
+
+    <script>
+        function goHome() {
+            window.location.href = "dashboard/";
+        }
+    </script>
+</body>
+</html>
