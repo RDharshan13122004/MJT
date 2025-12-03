@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'MJT_DB',         # your database name
         'USER': 'root',       # your MySQL username (or 'root')
-        'PASSWORD': '#Betterlucknext1me', # your MySQL password
+        'PASSWORD': '', # your MySQL password
         'HOST': '127.0.0.1',         # or 'localhost'
         'PORT': '3306',              # default MySQL port in XAMPP
     }
